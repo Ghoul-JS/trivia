@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respuestas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h1>Respuestas</h1>
+                <div>
+                    <label class="bg-success btn" id="texto1" for="ok">Acertadas</label>
+                    <label class="bg-success btn" id="acertadas" for="ok">0</label>
+                </div>
+                <div>
+                    <label class="bg-danger btn" id="texto2" for="error">Erroneas</label>
+                    <label class="bg-danger btn" id="erradas" for="error">0</label>
+                </div>
+            </div>
+            <button class="btn btn-warning" onclick="newTry()">Intentar de nuevo</button>
+        </div>
+    </div>
+    
+    <script src="/js/res.js"></script>
+</body>
+</html>
