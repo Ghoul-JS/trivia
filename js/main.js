@@ -59,10 +59,8 @@ function cardHTML(ques, cont1, cont2) {
 function answeres(correct, incorrects, cont1, cont2) {
 
     const ram = random();
-    let cont3 = 0;
 
     incorrects.splice(ram, 0, correct);
-
 
     //console.log(incorrects);
     var incorrectRBTN = '';
@@ -73,7 +71,7 @@ function answeres(correct, incorrects, cont1, cont2) {
 
         if (index === ram) {
             incorrectRBTN += `<div class="form-check">
-            <input class="form-check-input" type="radio" name="question${JSON.stringify(cont1)}" id="id${JSON.stringify(cont2)}" value="true">
+            <input class="form-check-input" type="radio" name="question${JSON.stringify(cont1)}" id="id${JSON.stringify(cont2)}" value= true>
             <label class="form-check-label" for="exampleRadios1">
             ${correct}
             </label>
@@ -81,7 +79,7 @@ function answeres(correct, incorrects, cont1, cont2) {
 
         } else {
             incorrectRBTN += `<div class="form-check">
-            <input class="form-check-input" type="radio" name="question${JSON.stringify(cont1)}" id="id${JSON.stringify(cont2)}" value="false">
+            <input class="form-check-input" type="radio" name="question${JSON.stringify(cont1)}" id="id${JSON.stringify(cont2)}" value= false>
             <label class="form-check-label" for="exampleRadios1">
             ${incorrect}
             </label>
@@ -89,8 +87,6 @@ function answeres(correct, incorrects, cont1, cont2) {
 
         }
         cont2++;
-        cont3++;
-
     });
 
     console.log(incorrectRBTN);
@@ -98,9 +94,9 @@ function answeres(correct, incorrects, cont1, cont2) {
 
 }
 
-function verifity() {
+function cantity() {
 
-    var cant = document.getElementById("question-numbers").value;
+    let cant = document.getElementById("question-numbers").value;
 
     if (cant === '0') {
         alert("No has Respondido a ninguna pregunta");
@@ -125,6 +121,18 @@ function verifity() {
                 }
 
             }
+
+            let total = ok + bad;
+
+            if (total < cant) {
+                alert("Conteste todas las preguntas ");
+            } else {
+                localStorage.setItem("buenas", JSON.stringify(ok));
+                localStorage.setItem("malas", JSON.stringify(bad));
+
+                window.location.href = '/result.html';
+            }
+
         } else if (type === 'multiple') {
 
             for (let i = 1; i <= JSON.parse(cant * 4); i++) {
@@ -140,6 +148,17 @@ function verifity() {
                 }
 
             }
+
+            let total = ok + bad;
+
+            if (total < cant) {
+                alert("Conteste todas las preguntas ");
+            } else {
+                localStorage.setItem("buenas", JSON.stringify(ok));
+                localStorage.setItem("malas", JSON.stringify(bad));
+
+                window.location.href = '/result.html';
+            }
         }
 
 
@@ -147,10 +166,7 @@ function verifity() {
         console.log(ok);
         console.log(bad);
 
-        localStorage.setItem("buenas", JSON.stringify(ok));
-        localStorage.setItem("malas", JSON.stringify(bad));
 
-        window.location.href = '/result.html';
     }
 }
 
@@ -158,5 +174,7 @@ function verifity() {
 function random() {
     return Math.floor(Math.random() * (4 - 1)) + 0;
 }
+
+
 
 
