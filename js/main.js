@@ -14,25 +14,6 @@ function getQuestions() {
         .then(data => printCards(data.results));
 }
 
-
-
-// function printCategory(getCategory) {
-//     const tCategory = document.getElementById('form-category');
-//     tCategory.innerHTML = '';
-
-//     getCategory.forEach( selectCategory => {
-//         const category = `<div class="form-group">
-//                             <label for="exampleFormControlSelect1">Categoría</label>
-//                             <select class="form-control" id="exampleFormControlSelect1">
-//                             <option>${selectCategory.category}</option>
-//                             </select>
-//                         </div>`;
-//         tCategory.innerHTML += category;
-//     })
-
-// }
-
-
 function printCards(questions) {
     const container = document.getElementById('container-card');
     container.innerHTML = '';
@@ -76,30 +57,45 @@ function cardHTML(ques, cont1, cont2) {
 }
 
 function answeres(correct, incorrects, cont1, cont2) {
-    const correctRBTN = `<div class="form-check">
-                            <input class="form-check-input" type="radio" name="question${JSON.stringify(cont1)}" id="id${JSON.stringify(cont2)}" value="true">
-                            <label class="form-check-label" for="exampleRadios1">
-                            ${correct}
-                            </label>
-                        </div>`;
-    console.log(cont2);
-    cont2++;
 
-    let incorrectRBTN = '';
+    const ram = random();
+    let cont3 = 0;
 
-    incorrects.forEach(incorrect => {
+    incorrects.splice(ram, 0, correct);
+
+
+    //console.log(incorrects);
+    var incorrectRBTN = '';
+
+
+    incorrects.forEach((incorrect, index) => {
         console.log(cont2);
-        incorrectRBTN += `<div class="form-check">
-                            <input class="form-check-input" type="radio" name="question${JSON.stringify(cont1)}" id="id${JSON.stringify(cont2)}" value="false">
-                            <label class="form-check-label" for="exampleRadios1">
-                            ${incorrect}
-                            </label>
-                        </div>`;
+
+        if (index === ram) {
+            incorrectRBTN += `<div class="form-check">
+            <input class="form-check-input" type="radio" name="question${JSON.stringify(cont1)}" id="id${JSON.stringify(cont2)}" value="true">
+            <label class="form-check-label" for="exampleRadios1">
+            ${correct}
+            </label>
+        </div>`
+
+        } else {
+            incorrectRBTN += `<div class="form-check">
+            <input class="form-check-input" type="radio" name="question${JSON.stringify(cont1)}" id="id${JSON.stringify(cont2)}" value="false">
+            <label class="form-check-label" for="exampleRadios1">
+            ${incorrect}
+            </label>
+        </div>`;
+
+        }
         cont2++;
-    })
-    console.log("acabado");
-    //console.log(cont2);
-    return correctRBTN + incorrectRBTN;
+        cont3++;
+
+    });
+
+    console.log(incorrectRBTN);
+    return incorrectRBTN;
+
 }
 
 function verifity() {
@@ -154,10 +150,13 @@ function verifity() {
         localStorage.setItem("buenas", JSON.stringify(ok));
         localStorage.setItem("malas", JSON.stringify(bad));
 
-        window.location.href = '/resp.html';
+        window.location.href = '/result.html';
     }
-
-
-
 }
+
+
+function random() {
+    return Math.floor(Math.random() * (4 - 1)) + 0;
+}
+
 
